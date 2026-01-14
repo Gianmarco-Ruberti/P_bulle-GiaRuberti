@@ -1,3 +1,4 @@
+import { TeacherFactory } from '#database/factories/teacher_factory'
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
 import Teacher from '#models/teacher'
 export default class extends BaseSeeder {
@@ -12,22 +13,8 @@ export default class extends BaseSeeder {
         origine: "Plateforme de jeux d'échecs",
         sectionId: 1,
       },
-      {
-        gender: 'man',
-        firstname: 'Xavier',
-        lastname: 'Carrel',
-        nickname: 'XCL',
-        origine: 'Sigle ETML',
-        sectionId: 1,
-      },
-      {
-        gender: 'woman',
-        firstname: 'Aurélie',
-        lastname: 'Curchod',
-        nickname: 'ACD',
-        origine: 'Sigle ETML',
-        sectionId: 1,
-      },
     ])
+    // Appel la factory pour créer 10 enseignants
+    await TeacherFactory.createMany(10)
   }
 }
