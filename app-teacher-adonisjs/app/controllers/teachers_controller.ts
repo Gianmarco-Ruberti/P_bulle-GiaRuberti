@@ -1,6 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 // import { dd } from '@adonisjs/core/services/dumper'
 import Teacher from '../models/teacher.js'
+import { teacherValidator } from '../validators/teacher.js'
+import Section from '../models/section.js'
 
 export default class TeachersController {
   /**
@@ -18,11 +20,37 @@ export default class TeachersController {
   /**
    * Display form to create a new record
    */
-  async create({}: HttpContext) {}
+  async create({ view }: HttpContext) {
+    // Récupération des sections triées par le nom
+    const sections = await Section.query().orderBy('name', 'asc')
+    // Appel de la vue
+    return view.render('pages/teachers/create', { title: "Ajout d'un enseignant", sections })
+  }
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) {}
+  async store({ request, session, response }: HttpContext) {
+    // Validation des données saisies par l'utilisateur
+    const { gender, firstname, lastname, nickname, origine, sectionId } =
+      await request.validateUsing(teacherValidator)
+    // Création du nouvel enseignant
+    const teacher = await Teacher.create({
+      gender,
+      firstname,
+      lastname,
+      nickname,
+      origine,
+      sectionId,
+    })
+    // Afficher un message à l'utilisateur
+    session.flash(
+      'success',
+      `Le nouvel enseignant ${teacher.lastname}
+${teacher.firstname} a été ajouté avec succès !`
+    )
+    // Rediriger vers la homepage
+    return response.redirect().toRoute('home')
+  }
   /**
    * Afficher les détails d'un enseignant (y compris le nom de sa section)
    */
