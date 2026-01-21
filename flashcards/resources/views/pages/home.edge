@@ -1,32 +1,21 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>
-      flashcards
-    </title>
-  </head>
-  <body>
-    @include('partials/header')
-    <h1>
-      Mes Deck
-    </h1>
-    <table>
-      <thead>
-        <tr>
-          <th>
-            Titre
-          </th>
-          <th>
-            Description
-          </th>
-          <th>
-            Cartes
-          </th>
-        </tr>
-      </thead>
-    </table>
-    @include('partials/footer')
-  </body>
-</html>
+@component('components/layout', {title: 'Accueil'})
+  <h1>
+    Mes Deck
+  </h1>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Titre
+        </th>
+        <th>
+          Description
+        </th>
+        <th>
+          Cartes
+        </th>
+      </tr>
+    </thead>
+  </table>
+  <button type="submit" class="Add">Ajouté</button>
+@end
