@@ -63,11 +63,45 @@ ${teacher.firstname} a été ajouté avec succès !`
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) {}
+  async edit({ params, view }: HttpContext) {
+    // Sélectionner l'enseignant dont on veut mettre à jour des informations
+    const teacher = await Teacher.findOrFail(params.id)
+    // Récupération des sections triées par le nom
+    const sections = await Section.query().orderBy('name', 'asc')
+    // Afficher la vue
+    return view.render('pages/teachers/edit.edge', {
+      title: 'Modifier un enseignant',
+      teacher,
+      sections,
+    })
+  }
   /**
    * Handle form submission for the edit action
    */
-  async update({ params, request }: HttpContext) {}
+  async update({ params, request, session, response }: HttpContext) {
+    // Validation des données saisies par l'utilisateur
+    const { gender, firstname, lastname, nickname, origine, sectionId } =
+      await request.validateUsing(teacherValidator)
+    // Sélectionner l'enseignant dont on veut mettre à jour des informations
+    const teacher = await Teacher.findOrFail(params.id)
+    // Met à jour les infos de l'enseignant
+    teacher.merge({
+      gender,
+      firstname,
+      lastname,
+      nickname,
+      origine,
+      sectionId,
+    })
+    const teacherUpdated = await teacher.save()
+    // Afficher un message à l'utilisateur
+    session.flash(
+      'success',
+      `L'enseignant ${teacherUpdated.lastname} ${teacherUpdated.firstname} a été mis à jour avec succès !`
+    )
+    // Redirige l'utilisateur sur la home
+    return response.redirect().toRoute('home')
+  }
   /**
    * Supprimer un enseignant
    */

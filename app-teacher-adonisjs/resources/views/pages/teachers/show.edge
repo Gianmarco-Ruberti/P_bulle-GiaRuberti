@@ -19,9 +19,10 @@
       {{ teacher.section.name }}
     </p>
     <div class="actions">
-      <a href="#">
+      <a href="{{ route('teacher.edit', {id: teacher.id}) }}">
         <img height="20em" src="/img/edit.png" alt="edit" />
       </a>
+
       <a href="#">
         <img height="20em" src="/img/delete.png" alt="delete" />
       </a>

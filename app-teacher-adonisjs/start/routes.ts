@@ -18,3 +18,7 @@ router.delete('/teacher/:id/destroy', [TeachersController, 'destroy']).as('teach
 router.get('/teacher/add', [TeachersController, 'create']).as('teacher.create')
 // Route permettant l'ajout de l'enseignant
 router.post('/teacher/add', [TeachersController, 'store']).as('teacher.store')
+// Route permettant d'afficher le formulaire permettant la mise à jour d'un enseignant
+router.get('/teacher/:id/edit', [TeachersController, 'edit']).as('teacher.edit')
+// Route permettant la modification de l'enseignant
+router.put('/teacher/:id/update', [TeachersController, 'update']).as('teacher.update')
