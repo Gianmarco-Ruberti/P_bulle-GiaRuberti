@@ -9,6 +9,7 @@
 
 import TeachersController from '#controllers/teachers_controller'
 import router from '@adonisjs/core/services/router'
+import SectionsController from '../app/controllers/sections_controller.js'
 router.get('/', [TeachersController, 'index']).as('home')
 // Route permettant de voir les détails d'un enseignant
 router.get('/teacher/:id/show', [TeachersController, 'show']).as('teacher.show')
@@ -22,3 +23,7 @@ router.post('/teacher/add', [TeachersController, 'store']).as('teacher.store')
 router.get('/teacher/:id/edit', [TeachersController, 'edit']).as('teacher.edit')
 // Route permettant la modification de l'enseignant
 router.put('/teacher/:id/update', [TeachersController, 'update']).as('teacher.update')
+router.get('/section', [SectionsController, 'show']).as('section.show')
+router.get('/section/add', [SectionsController, 'create']).as('section.add')
+router.post('/section/add', [SectionsController, 'store']).as('section.store')
+router.delete('/section/:id/destroy', [SectionsController, 'destroy']).as('section.destroy')
