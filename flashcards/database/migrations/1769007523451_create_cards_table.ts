@@ -7,7 +7,7 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('question').notNullable().unique()
-      table.string('anser').notNullable()
+      table.string('answer').notNullable()
       table
         .integer('Deck_id')
         .unsigned()
