@@ -4,9 +4,9 @@ import { sectionValidator } from '../validators/section.js'
 
 export default class SectionsController {
   async show({ view }: HttpContext) {
-    const section = await Section.query().orderBy('name', 'asc')
+    const sections = await Section.query().orderBy('name', 'asc')
     // Afficher la vue
-    return view.render('pages/sections/show.edge', { title: 'Liste des sections', section })
+    return view.render('pages/sections/show.edge', { title: 'Liste des sections', sections })
   }
   async create({ view }: HttpContext) {
     // Récupération des sections triées par le nom
