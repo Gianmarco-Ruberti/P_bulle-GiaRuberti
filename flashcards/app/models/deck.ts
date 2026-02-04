@@ -13,10 +13,10 @@ export default class Deck extends BaseModel {
   @column()
   declare description: string
 
-  @column()
+  @column({ columnName: 'cards_count' })
   declare cardsCount: number
 
-  @column()
+  @column({ columnName: 'user_id' })
   declare UserId: number
 
   @belongsTo(() => User)

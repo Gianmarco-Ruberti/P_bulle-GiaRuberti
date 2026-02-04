@@ -12,7 +12,7 @@ export default class extends BaseSchema {
         .integer('Deck_id')
         .unsigned()
         .references('id')
-        .inTable('cards')
+        .inTable('decks')
         .onDelete('CASCADE')
         .onUpdate('CASCADE')
       table.timestamp('created_at')
