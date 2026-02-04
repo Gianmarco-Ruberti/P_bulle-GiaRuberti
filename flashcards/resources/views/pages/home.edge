@@ -1,21 +1,81 @@
-@component('components/layout', {title: 'Accueil'})
-  <h1>
-    Mes Deck
-  </h1>
-  <table>
-    <thead>
-      <tr>
-        <th>
-          Titre
-        </th>
-        <th>
-          Description
-        </th>
-        <th>
-          Cartes
-        </th>
-      </tr>
-    </thead>
-  </table>
-  <button type="submit" class="Add">Ajouté</button>
-@end
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      FlashCards - Accueil
+    </title>
+    @vite(['resources/css/app.css'])
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>
+          FlashCards
+        </h1>
+        <div>
+          {{-- Pour le moment on simule l'utilisateur comme tu n'en veux pas --}}
+          <span>Utilisateur : <strong>Étudiant</strong></span>
+          <button class="btn btn-outline" style="margin-left:10px">Déco</button>
+        </div>
+      </header>
+
+      <main>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h2>
+            Ma collection de decks
+          </h2>
+          <a href="/decks/new" class="btn btn-primary">Ajouter un deck</a>
+        </div>
+
+        {{-- Affichage des messages flash (succès après création) --}}
+        @if(flashMessages.has('notification'))
+          <div
+            style="background: #d4edda; color: #155724; padding: 10px; margin-bottom: 20px; border-radius: 5px;"
+          >
+            {{ flashMessages.get('notification') }}
+          </div>
+        @end
+        
+        <table>
+          <thead>
+            <tr>
+              <th>
+                Titre
+              </th>
+              <th>
+                Description
+              </th>
+              <th style="text-align: center;">
+                Nombre de cartes
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            @each(deck in decks)
+              <tr class="deck-row" onclick="window.location.href='/decks/{{ deck.id }}'">
+                <td>
+                  <strong>{{ deck.title }}</strong>
+                </td>
+                <td>
+                  {{ deck.description }}
+                </td>
+                <td style="text-align: center;">
+                  <span class="badge">{{ deck.cardsCount }}</span>
+                </td>
+              </tr>
+            @else
+              <tr>
+                <td colspan="3" style="text-align: center; padding: 40px;">
+                  Vous n'avez pas encore de deck. 
+                <br />                  <br />
+                  <a href="/decks/new" class="btn btn-primary">Créer mon premier deck</a>
+                </td>
+              </tr>
+            @end
+          </tbody>
+        </table>
+      </main>
+    </div>
+  </body>
+</html>
