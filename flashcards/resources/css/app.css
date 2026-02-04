@@ -1,10 +1,120 @@
-* {
-  margin: 0;
-  padding: 0;
+:root {
+  --primary: #2d3436;
+  --secondary: #0984e3;
+  --accent: #00cec9;
+  --danger: #d63031;
+  --light: #dfe6e9;
+  --white: #ffffff;
 }
 
-html,
 body {
-  height: 100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7f6;
+  color: var(--primary);
+  margin: 0;
+  padding: 20px;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 20px;
+  border-bottom: 2px solid var(--light);
+  margin-bottom: 30px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+/* Tableaux style "Homepage" */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+table {
   width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+th,
+td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid var(--light);
+}
+
+/* Effet de survol demandé dans l'analyse */
+.deck-row {
+  transition: background 0.2s;
+}
+
+.deck-row:hover {
+  background-color: #f9f9f9;
+  cursor: pointer; /* Indique que c'est cliquable */
+}
+
+/* Boutons */
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background: var(--secondary);
+  color: white;
+}
+.btn-danger {
+  background: var(--danger);
+  color: white;
+}
+.btn-outline {
+  border: 1px solid var(--primary);
+  color: var(--primary);
+  background: transparent;
+}
+
+/* Messages d'erreur (Maquette "error") */
+.error-message {
+  color: var(--danger);
+  font-size: 0.9rem;
+  margin-top: 5px;
+  font-weight: bold;
+}
+
+/* Formulaires (New Deck / New Card) */
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--light);
+  border-radius: 4px;
+  box-sizing: border-box;
 }
