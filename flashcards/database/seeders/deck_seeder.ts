@@ -1,7 +1,8 @@
 import { BaseSeeder } from '@adonisjs/lucid/seeders'
+import { DeckFactory } from '../factories/deck_factory.js'
 
 export default class extends BaseSeeder {
   async run() {
-    // Write your database queries inside the run method
+    await DeckFactory.createMany(10)
   }
 }
