@@ -9,7 +9,7 @@ export default class extends BaseSchema {
       table.string('question').notNullable().unique()
       table.string('answer').notNullable()
       table
-        .integer('Deck_id')
+        .integer('deck_id')
         .unsigned()
         .references('id')
         .inTable('decks')
