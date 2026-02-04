@@ -1,0 +1,42 @@
+@component('./components/layout')
+  @set('title', 'Créer un nouveau Deck')
+
+    @slot('main')
+      <div class="container-small">
+        <h2>
+          Nouveau Deck
+        </h2>
+
+        <form action="/decks" method="POST">
+          {{-- Protection contre les failles CSRF --}}
+          {{ csrfField() }}
+          <div class="form-group">
+            <label for="title">Titre du deck</label>
+            <input type="text" name="title" id="title" value="{{ old('title') || '' }}" />
+            {{-- Message d'erreur pour le titre --}}
+            @inputError('title')
+              <p class="error-message">
+                {{ $messages.join(', ') }}
+              </p>
+            @end
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description (min. 10 caractères)</label>
+            <textarea name="description" id="description" rows="4">{{ old('description') || '' }}</textarea>
+            {{-- Message d'erreur pour la description --}}
+            @inputError('description')
+              <p class="error-message">
+                {{ $messages.join(', ') }}
+              </p>
+            @end
+          </div>
+
+          <div style="margin-top: 20px;">
+            <button type="submit" class="btn btn-primary">Enregistrer le deck</button>
+            <a href="/" class="btn btn-outline">Annuler</a>
+          </div>
+        </form>
+      </div>
+    @end
+  @end
