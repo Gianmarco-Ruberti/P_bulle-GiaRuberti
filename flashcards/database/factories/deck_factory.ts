@@ -6,7 +6,6 @@ export const DeckFactory = factory
     return {
       title: faker.lorem.words(2),
       description: faker.lorem.sentence(),
-      cardsCount: faker.number.int({ min: 0, max: 50 }),
     }
   })
   .build()

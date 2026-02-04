@@ -6,6 +6,7 @@ export const CardFactory = factory
     return {
       question: faker.lorem.sentence(),
       answer: faker.lorem.paragraph(),
+      deck_id: faker.number.int({ min: 0, max: 10 }),
     }
   })
   .build()
