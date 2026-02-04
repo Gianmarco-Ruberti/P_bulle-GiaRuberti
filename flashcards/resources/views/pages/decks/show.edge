@@ -1,0 +1,55 @@
+@component('components/layout', { title: deck.title })
+  <div class="deck-details">
+    <header style="margin-bottom: 30px;">
+      <a href="/" class="btn btn-outline" style="margin-bottom: 15px; display: inline-block;">
+        ← Retour à la collection
+      </a>
+      <h1>
+        {{ deck.title }}
+      </h1>
+      <p class="text-muted">
+        {{ deck.description }}
+      </p>
+    </header>
+
+    <section class="cards-list">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <h3>
+          Cartes dans ce deck ({{ deck.cards.length }})
+        </h3>
+        <a href="/decks/{{ deck.id }}/cards/new" class="btn btn-primary">
+          + Ajouter une carte
+        </a>
+      </div>
+
+      @each(card in deck.cards)
+        <div
+          class="card-item"
+          style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee;"
+        >
+          <div style="margin-bottom: 10px;">
+            <span style="color: #6c5ce7; font-weight: bold; text-transform: uppercase; font-size: 0.8rem;">Question</span>
+            <p style="font-size: 1.1rem; margin: 5px 0;">
+              {{ card.question }}
+            </p>
+          </div>
+          <div style="border-top: 1px dashed #eee; pt-10; margin-top: 10px; padding-top: 10px;">
+            <span style="color: #00b894; font-weight: bold; text-transform: uppercase; font-size: 0.8rem;">Réponse</span>
+            <p style="margin: 5px 0;">
+              {{ card.answer }}
+            </p>
+          </div>
+        </div>
+      @else
+        <div style="text-align: center; padding: 50px; background: #f9f9f9; border-radius: 8px;">
+          <p>
+            Ce deck est vide pour le moment.
+          </p>
+          <a href="/decks/{{ deck.id }}/cards/new" class="btn btn-primary" style="margin-top: 10px;">
+            Créer la première carte
+          </a>
+        </div>
+      @end
+    </section>
+  </div>
+@end

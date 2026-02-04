@@ -22,6 +22,6 @@ router
     router.post('/', [DecksController, 'store']).as('decks.store')
 
     // Affiche un deck spécifique : GET /decks/:id
-    router.get('/:id', [DecksController, 'show']).as('decks.show')
+    router.get('/:id', [DecksController, 'index']).as('decks.index')
   })
   .prefix('/decks')

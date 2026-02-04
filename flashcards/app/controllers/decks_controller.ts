@@ -3,7 +3,7 @@ import vine from '@vinejs/vine'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class DecksController {
-  async show({ params, view }: HttpContext) {
+  async index({ params, view }: HttpContext) {
     // On récupère l'ID depuis l'URL (ex: /decks/5)
     // On utilise .preload('cards') pour charger les cartes liées au deck
     const deck = await Deck.query().where('id', params.id).preload('cards').firstOrFail() // Renvoie une erreur 404 si l'ID n'existe pas
@@ -33,5 +33,18 @@ export default class DecksController {
     // 3. Notification de succès et redirection
     session.flash('notification', 'Le deck a été créé avec succès !')
     return response.redirect().toPath('/')
+  }
+  // Ajoute cette méthode dans ton DecksController
+  async show({ params, view }: HttpContext) {
+    try {
+      // 1. On cherche le deck par son ID
+      // 2. On charge les cartes associées (Eager Loading)
+      const deck = await Deck.query().where('id', params.id).preload('cards').firstOrFail()
+
+      return view.render('pages/decks/show', { deck })
+    } catch (error) {
+      // Si l'ID n'existe pas, firstOrFail jette une erreur
+      return view.render('errors/not_found')
+    }
   }
 }
