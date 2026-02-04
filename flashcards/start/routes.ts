@@ -15,13 +15,12 @@ router.get('/', [AuthController, 'index'])
 
 router
   .group(() => {
-    // Affiche le formulaire de création : GET /decks/new
-    router.get('/new', [DecksController, 'create']).as('decks.create')
+    router.get('/:id', [DecksController, 'index']).as('decks.index')
 
-    // Traite la création : POST /decks
+    router.get('/new', [DecksController, 'create']).as('decks.create')
     router.post('/', [DecksController, 'store']).as('decks.store')
 
-    // Affiche un deck spécifique : GET /decks/:id
-    router.get('/:id', [DecksController, 'index']).as('decks.index')
+    router.get('/:id/edit', [DecksController, 'edit']).as('decks.edit')
+    router.put('/:id', [DecksController, 'update']).as('decks.update')
   })
   .prefix('/decks')

@@ -1,0 +1,30 @@
+@component('components/layout', { title: 'Modifier ' + deck.title })
+  <h2>
+    Modifier le Deck
+  </h2>
+
+  <form action="/decks/{{ deck.id }}?_method=PUT" method="POST">
+    {{ csrfField() }}
+    <div class="form-group">
+      <label>Titre</label>
+      <input type="text" name="title" value="{{ old('title') || deck.title }}" />
+      @inputError('title')
+        <p class="error">
+          {{ $messages.join(', ') }}
+        </p>
+      @end
+    </div>
+
+    <div class="form-group">
+      <label>Description</label>
+      <textarea name="description">{{ old('description') || deck.description }}</textarea>
+      @inputError('description')
+        <p class="error">
+          {{ $messages.join(', ') }}
+        </p>
+      @end
+    </div>
+
+    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+  </form>
+@end
