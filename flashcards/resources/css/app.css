@@ -118,3 +118,18 @@ textarea {
   border-radius: 4px;
   box-sizing: border-box;
 }
+.deck-row {
+  transition: background 0.3s;
+}
+
+.deck-row:hover {
+  background-color: #f1f2f6;
+  cursor: pointer; /* C'est cette ligne qui fait changer le curseur */
+}
+
+.badge {
+  background: #dfe6e9;
+  padding: 4px 12px;
+  border-radius: 15px;
+  font-size: 0.9em;
+}
