@@ -31,5 +31,6 @@ router
 router
   .group(() => {
     router.get('/:id', [CardsController, 'show']).as('cards.show')
+    router.delete('/:id', [CardsController, 'destroy']).as('card.destroy')
   })
   .prefix('/card')

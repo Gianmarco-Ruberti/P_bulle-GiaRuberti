@@ -1,15 +1,7 @@
 @component('./components/layout', { title: card.question })
   <div class="container" style="max-width: 600px; margin: 40px auto; font-family: sans-serif;">
 
-    <a
-      href="{{ route('decks.show', [deck.id]) }} style="
-      color:
-      c5ce7
-      text-decoration:
-      none
-      font-size:
-      rem
-    >
+    <a href="#" style="color: #6c5ce7; text-decoration: none; font-size: 0.9rem;">
       ← Retour au deck
     </a>
 
@@ -60,11 +52,16 @@
         >
           Mettre à jour la carte
         </button>
-        <button
-          style="background: #ff7675; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold;"
+        <form
+          action="{{ route('card.destroy', [card.id]) }}?_method=DELETE"
+          method="POST"
+          onsubmit="return confirm('Es-tu sûr de vouloir supprimer ce deck ? Cette action est irréversible.')"
         >
-          Supprimer
-        </button>
+          {{ csrfField() }}
+          <button type="submit" class="btn btn-outline">
+            Supprimer
+          </button>
+        </form>
       </div>
 
     </div>
