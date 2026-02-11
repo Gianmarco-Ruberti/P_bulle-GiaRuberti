@@ -20,7 +20,7 @@
         <form
           action="{{ route('decks.destroy', [deck.id]) }}?_method=DELETE"
           method="POST"
-          {{--  onsubmit="return confirm('Es-tu sûr de vouloir supprimer ce deck ? Cette action est irréversible.')"  --}}
+          onsubmit="return confirm('Es-tu sûr de vouloir supprimer ce deck ? Cette action est irréversible.')"
         >
           {{ csrfField() }}
           <button type="submit" class="btn btn-outline">

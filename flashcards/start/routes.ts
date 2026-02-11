@@ -23,6 +23,6 @@ router
     router.get('/:id/edit', [DecksController, 'edit']).as('decks.edit')
     router.put('/:id', [DecksController, 'update']).as('decks.update')
 
-    router.delete('/:id', [DecksController, 'destroy']).as('decks.destroy')
+    router.delete('/delete/:id', [DecksController, 'destroy']).as('decks.destroy')
   })
   .prefix('/decks')
