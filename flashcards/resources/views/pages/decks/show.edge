@@ -31,23 +31,27 @@
       </div>
 
       @each(card in deck.cards)
-        <div
-          class="card-item"
-          style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee;"
-        >
-          <div style="margin-bottom: 10px;">
-            <span style="color: #6c5ce7; font-weight: bold; text-transform: uppercase; font-size: 0.8rem;">Question</span>
-            <p style="font-size: 1.1rem; margin: 5px 0;">
-              {{ card.question }}
-            </p>
+        <a href="{{ route('cards.show', [card.id]) }}" style="text-decoration: none; color: inherit;">
+          <div
+            class="card-item"
+            style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee; transition: transform 0.2s;"
+            onmouseover="this.style.transform='scale(1.01)'"
+            onmouseout="this.style.transform='scale(1)'"
+          >
+            <div style="margin-bottom: 10px;">
+              <span style="color: #6c5ce7; font-weight: bold; text-transform: uppercase; font-size: 0.8rem;">Question</span>
+              <p style="font-size: 1.1rem; margin: 5px 0;">
+                {{ card.question }}
+              </p>
+            </div>
+            <div style="border-top: 1px dashed #eee; margin-top: 10px; padding-top: 10px;">
+              <span style="color: #00b894; font-weight: bold; text-transform: uppercase; font-size: 0.8rem;">Réponse</span>
+              <p style="margin: 5px 0;">
+                {{ card.answer }}
+              </p>
+            </div>
           </div>
-          <div style="border-top: 1px dashed #eee; pt-10; margin-top: 10px; padding-top: 10px;">
-            <span style="color: #00b894; font-weight: bold; text-transform: uppercase; font-size: 0.8rem;">Réponse</span>
-            <p style="margin: 5px 0;">
-              {{ card.answer }}
-            </p>
-          </div>
-        </div>
+        </a>
       @else
         <div style="text-align: center; padding: 50px; background: #f9f9f9; border-radius: 8px;">
           <p>

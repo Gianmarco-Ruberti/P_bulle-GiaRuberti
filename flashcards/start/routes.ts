@@ -10,6 +10,7 @@
 import router from '@adonisjs/core/services/router'
 import AuthController from '../app/controllers/auth_controller.js'
 import DecksController from '../app/controllers/decks_controller.js'
+import CardsController from '../app/controllers/cards_controller.js'
 
 router.get('/', [AuthController, 'index'])
 
@@ -26,3 +27,9 @@ router
     router.delete('/delete/:id', [DecksController, 'destroy']).as('decks.destroy')
   })
   .prefix('/decks')
+
+router
+  .group(() => {
+    router.get('/:id', [CardsController, 'show']).as('cards.show')
+  })
+  .prefix('/card')
