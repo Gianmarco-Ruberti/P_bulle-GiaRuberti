@@ -89,4 +89,33 @@ export default class DecksController {
     // 5. Redirection vers la page de détails du deck que l'on vient de modifier
     return response.redirect().toPath(`/decks/${deck.id}`)
   }
+  /**
+   * Supprimer un deck et ses cartes
+   */
+  async destroy({ params, response, session }: HttpContext) {
+    try {
+      // 1. Trouver le deck par son ID
+      const deck = await Deck.findOrFail(params.id)
+
+      // 2. Supprimer le deck
+      // (Si tu as configuré les onDelete: 'cascade' en BDD, les cartes suivront)
+      await deck.delete()
+
+      // 3. Ajouter un message flash de succès
+      session.flash('notification', {
+        type: 'success',
+        message: 'Le deck a été supprimé avec succès.',
+      })
+
+      // 4. Rediriger vers la liste des decks
+      return response.redirect('/')
+    } catch (error) {
+      // Cas où le deck n'existe pas ou erreur SQL
+      session.flash('notification', {
+        type: 'error',
+        message: 'Impossible de supprimer ce deck.',
+      })
+      return response.redirect().back()
+    }
+  }
 }

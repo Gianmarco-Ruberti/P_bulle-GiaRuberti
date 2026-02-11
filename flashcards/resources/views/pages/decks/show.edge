@@ -17,6 +17,16 @@
         <h3>
           Cartes dans ce deck ({{ deck.cards.length }})
         </h3>
+        <form
+          action="{{ route('decks.destroy', [deck.id]) }}?_method=DELETE"
+          method="POST"
+          {{--  onsubmit="return confirm('Es-tu sûr de vouloir supprimer ce deck ? Cette action est irréversible.')"  --}}
+        >
+          {{ csrfField() }}
+          <button type="submit" class="btn btn-outline">
+            Supprimer
+          </button>
+        </form>
         <a href="/decks/{{ deck.id }}/edit" class="btn btn-outline">Modifier</a>
       </div>
 
