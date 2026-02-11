@@ -6,7 +6,9 @@
         <h2>
           Ma collection de decks
         </h2>
-        <a href="/decks/new" class="btn btn-primary">Ajouter un deck</a>
+        <a href="{{ route('decks.create') }}" class="btn btn-primary">
+          Ajouter un deck
+        </a>
       </div>
 
       @if(flashMessages.has('notification'))

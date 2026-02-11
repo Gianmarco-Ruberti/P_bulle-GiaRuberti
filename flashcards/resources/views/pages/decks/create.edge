@@ -8,7 +8,6 @@
         </h2>
 
         <form action="/decks" method="POST">
-          {{-- Protection contre les failles CSRF --}}
           {{ csrfField() }}
           <div class="form-group">
             <label for="title">Titre du deck</label>

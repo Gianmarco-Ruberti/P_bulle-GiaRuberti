@@ -15,10 +15,10 @@ router.get('/', [AuthController, 'index'])
 
 router
   .group(() => {
-    router.get('/:id', [DecksController, 'index']).as('decks.index')
-
     router.get('/new', [DecksController, 'create']).as('decks.create')
     router.post('/', [DecksController, 'store']).as('decks.store')
+
+    router.get('/:id', [DecksController, 'show']).as('decks.show')
 
     router.get('/:id/edit', [DecksController, 'edit']).as('decks.edit')
     router.put('/:id', [DecksController, 'update']).as('decks.update')

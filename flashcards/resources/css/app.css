@@ -29,7 +29,6 @@ h1 {
   font-size: 1.5rem;
 }
 
-/* Tableaux style "Homepage" */
 .container {
   max-width: 900px;
   margin: 0 auto;
@@ -56,17 +55,15 @@ td {
   border-bottom: 1px solid var(--light);
 }
 
-/* Effet de survol demandé dans l'analyse */
 .deck-row {
   transition: background 0.2s;
 }
 
 .deck-row:hover {
   background-color: #f9f9f9;
-  cursor: pointer; /* Indique que c'est cliquable */
+  cursor: pointer;
 }
 
-/* Boutons */
 .btn {
   padding: 10px 20px;
   border-radius: 5px;
@@ -91,7 +88,6 @@ td {
   background: transparent;
 }
 
-/* Messages d'erreur (Maquette "error") */
 .error-message {
   color: var(--danger);
   font-size: 0.9rem;
@@ -99,7 +95,6 @@ td {
   font-weight: bold;
 }
 
-/* Formulaires (New Deck / New Card) */
 .form-group {
   margin-bottom: 15px;
 }
@@ -124,7 +119,7 @@ textarea {
 
 .deck-row:hover {
   background-color: #f1f2f6;
-  cursor: pointer; /* C'est cette ligne qui fait changer le curseur */
+  cursor: pointer;
 }
 
 .badge {

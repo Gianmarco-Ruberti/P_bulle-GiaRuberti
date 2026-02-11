@@ -11,9 +11,7 @@
   <body>
     <div class="container">
       @include('partials/header.edge')
-
       <main>
-        {{-- C'est ici que le contenu des autres pages sera injecté --}}
         {{{ await $slots.main() }}}
       </main>
 
