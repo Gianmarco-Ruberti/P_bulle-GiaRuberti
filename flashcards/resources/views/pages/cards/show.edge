@@ -1,8 +1,15 @@
 @component('./components/layout', { title: card.question })
   <div class="container" style="max-width: 600px; margin: 40px auto; font-family: sans-serif;">
 
-    {{-- Lien de retour --}}
-    <a href="#" style="color: #6c5ce7; text-decoration: none; font-size: 0.9rem;">
+    <a
+      href="{{ route('decks.show', [deck.id]) }} style="
+      color:
+      c5ce7
+      text-decoration:
+      none
+      font-size:
+      rem
+    >
       ← Retour au deck
     </a>
 
@@ -36,36 +43,6 @@
 
     {{-- Section des actions --}}
     <div style="display: flex; flex-direction: column; gap: 20px;">
-
-      {{-- Formulaire factice de modification --}}
-      <div style="background: #f9f9fb; padding: 25px; border-radius: 12px;">
-        <h3 style="margin-top: 0; font-size: 1rem;">
-          Modifier les informations
-        </h3>
-
-        <div style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">Question</label>
-          <input
-            type="text"
-            value="{{ card.question }}"
-            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;"
-          />
-        </div>
-
-        <div style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">Réponse</label>
-          <textarea
-            style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; min-height: 80px;"
-          >{{ card.answer }}</textarea>
-        </div>
-
-        <button
-          style="background: #6c5ce7; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%;"
-        >
-          Mettre à jour la carte
-        </button>
-      </div>
-
       {{-- Zone de danger (Suppression) --}}
       <div
         style="border: 1px solid #fab1a0; padding: 20px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center;"
@@ -78,6 +55,11 @@
             Cette action est irréversible.
           </p>
         </div>
+        <button
+          style="background: blue; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold;"
+        >
+          Mettre à jour la carte
+        </button>
         <button
           style="background: #ff7675; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold;"
         >
