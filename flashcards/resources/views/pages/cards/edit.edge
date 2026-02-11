@@ -1,27 +1,32 @@
-<div style="background: #f9f9fb; padding: 25px; border-radius: 12px;">
-  <h3 style="margin-top: 0; font-size: 1rem;">
-    Modifier les informations
-  </h3>
+@component('components/layout', { title: 'Modifier '})
+  <h2>
+    Modifier la Question
+  </h2>
 
-  <div style="margin-bottom: 15px;">
-    <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">Question</label>
-    <input
-      type="text"
-      value="{{ card.question }}"
-      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box;"
-    />
-  </div>
+  <form action="/cards/{{ card.id }}?_method=PUT" method="POST">
+    {{ csrfField() }}
+    <div class="form-group">
+      <label>Question</label>
+      <input type="text" name="question" value="{{ old('question') || card.question }}" />
+      {{-- Message d'erreur pour la question --}}
+      @inputError('question')
+        <p class="error">
+          {{ $messages.join(', ') }}
+        </p>
+      @end
+    </div>
 
-  <div style="margin-bottom: 15px;">
-    <label style="display: block; margin-bottom: 5px; font-size: 0.9rem;">Réponse</label>
-    <textarea
-      style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; min-height: 80px;"
-    >{{ card.answer }}</textarea>
-  </div>
+    <div class="form-group">
+      <label>reponse</label>
+      <textarea name="reponse">{{ old('reponse') || card.answer }}</textarea>
+      {{-- Message d'erreur pour la reponse --}}
+      @inputError('reponse')
+        <p class="error">
+          {{ $messages.join(', ') }}
+        </p>
+      @end
+    </div>
 
-  <button
-    style="background: #6c5ce7; color: white; border: none; padding: 12px 20px; border-radius: 8px; cursor: pointer; font-weight: bold; width: 100%;"
-  >
-    Mettre à jour la carte
-    </button>
-</div>
+    <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+  </form>
+@end

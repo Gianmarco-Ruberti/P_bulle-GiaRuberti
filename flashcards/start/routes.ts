@@ -30,6 +30,8 @@ router
 
 router
   .group(() => {
+    router.get('/:id/edit', [CardsController, 'edit']).as('cards.edit')
+    router.put('/:id', [CardsController, 'update']).as('cards.update')
     router.get('/:id', [CardsController, 'show']).as('cards.show')
     router.delete('/:id', [CardsController, 'destroy']).as('card.destroy')
   })

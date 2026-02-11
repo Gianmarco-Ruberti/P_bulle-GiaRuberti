@@ -47,11 +47,7 @@
             Cette action est irréversible.
           </p>
         </div>
-        <button
-          style="background: blue; color: white; border: none; padding: 10px 15px; border-radius: 6px; cursor: pointer; font-weight: bold;"
-        >
-          Mettre à jour la carte
-        </button>
+        <a href="/card/{{ card.id }}/edit" class="btn btn-outline">Modifier</a>
         <form
           action="{{ route('card.destroy', [card.id]) }}?_method=DELETE"
           method="POST"
