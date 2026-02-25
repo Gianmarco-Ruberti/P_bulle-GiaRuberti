@@ -3,6 +3,10 @@ import vine from '@vinejs/vine'
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class DecksController {
+  async index({ view }: HttpContext) {
+    const decks = await Deck.query().withCount('cards')
+    return view.render('pages/home', { decks })
+  }
   async show({ params, view }: HttpContext) {
     // On récupère l'ID depuis l'URL (ex: /decks/5)
     // On utilise .preload('cards') pour charger les cartes liées au deck
@@ -33,7 +37,7 @@ export default class DecksController {
     // 3. Notification de succès et redirection
     session.flash('notification', {
       type: 'success',
-      message: 'Le Deck a été créé avec succès !',
+      message: 'Le a été créé avec succès !',
     })
     return response.redirect().toPath('/')
   }

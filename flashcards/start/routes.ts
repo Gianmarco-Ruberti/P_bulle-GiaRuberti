@@ -11,7 +11,13 @@ import router from '@adonisjs/core/services/router'
 import AuthController from '../app/controllers/auth_controller.js'
 import DecksController from '../app/controllers/decks_controller.js'
 import CardsController from '../app/controllers/cards_controller.js'
-router.get('/', [AuthController, 'index'])
+router.get('/', [DecksController, 'index']).as('deck.index')
+
+//auth
+router.group(() => {
+  router.get('/login', [AuthController, 'showLogin']).as('auth.login')
+  router.post('/login', [AuthController, 'login']).as('auth.handleLogin')
+})
 
 router
   .group(() => {
