@@ -11,7 +11,6 @@ import router from '@adonisjs/core/services/router'
 import AuthController from '../app/controllers/auth_controller.js'
 import DecksController from '../app/controllers/decks_controller.js'
 import CardsController from '../app/controllers/cards_controller.js'
-
 router.get('/', [AuthController, 'index'])
 
 router
@@ -30,6 +29,8 @@ router
 
 router
   .group(() => {
+    router.get('/new', [CardsController, 'create']).as('cards.create')
+    router.post('/', [CardsController, 'store']).as('cards.store')
     router.get('/:id/edit', [CardsController, 'edit']).as('cards.edit')
     router.put('/:id', [CardsController, 'update']).as('cards.update')
     router.get('/:id', [CardsController, 'show']).as('cards.show')

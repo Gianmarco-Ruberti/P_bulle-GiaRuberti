@@ -17,7 +17,7 @@ export default class DecksController {
 
   // Enregistre les données
   async store({ request, response, session }: HttpContext) {
-    // 1. Définir les règles de validation (Analyse p.7)
+    // 1. Définir les règles de validation
     const payload = await request.validateUsing(
       vine.compile(
         vine.object({
@@ -31,7 +31,10 @@ export default class DecksController {
     await Deck.create(payload)
 
     // 3. Notification de succès et redirection
-    session.flash('notification', 'Le deck a été créé avec succès !')
+    session.flash('notification', {
+      type: 'success',
+      message: 'Le Deck a été créé avec succès !',
+    })
     return response.redirect().toPath('/')
   }
 
