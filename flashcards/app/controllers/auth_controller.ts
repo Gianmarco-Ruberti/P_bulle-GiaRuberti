@@ -4,12 +4,10 @@ import { loginValidator } from '#validators/auth'
 
 export default class AuthController {
   async showLogin({ view }: HttpContext) {
-    console.log(' Affichage de la page de login')
     return view.render('pages/auth/login')
   }
 
   async login({ request, auth, response, session }: HttpContext) {
-    console.log(' Tentative de connexion reçue...')
     const data = request.all()
     console.log(` username fourni: ${data.username}`)
 
@@ -24,7 +22,6 @@ export default class AuthController {
 
       // 3. Création de la session
       await auth.use('web').login(user)
-      console.log(' Session créée, redirection vers /decks')
 
       return response.redirect().toRoute('decks.index')
     } catch (error) {
