@@ -17,6 +17,8 @@
         <h3>
           Cartes dans ce deck ({{ deck.cards.length }})
         </h3>
+        <a href="/decks/{{ deck.id }}/cards/new" class="btn btn-primary">+ Ajouter une carte</a>
+        <a href="/decks/{{ deck.id }}/edit" class="btn btn-outline">Modifier</a>
         <form
           action="{{ route('decks.destroy', [deck.id]) }}?_method=DELETE"
           method="POST"
@@ -27,7 +29,6 @@
             Supprimer
           </button>
         </form>
-        <a href="/decks/{{ deck.id }}/edit" class="btn btn-outline">Modifier</a>
       </div>
 
       @each(card in deck.cards)
@@ -62,9 +63,6 @@
           </a>
         </div>
       @end
-      <a href="/decks/{{ deck.id }}/cards/new" class="btn btn-primary">
-        + Ajouter une carte
-      </a>
     </section>
   </div>
 @end
