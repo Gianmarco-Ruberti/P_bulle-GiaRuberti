@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    @vite(['resources/css/app.css', 'resources/js/app.js', `resources/css/login.css`])
+    <title>
+      {{ "Login | Flash Dam\'s" }}
+    </title>
+  </head>
+  <header>
+    <h1>
+      <a href="/" style="text-decoration: none; color: inherit;">FlashCards</a>
+    </h1>
+  </header>
+
+  <main class="auth-container">
+    <div class="auth-card">
+      <h1>
+        Connexion
+      </h1>
+
+      <form action="{{ route('auth.login') }}" method="POST">
+        {{ csrfField() }}
+        <div class="form-group">
+          <label for="username">Pseudo</label>
+          <input type="text" name="username" value="{{ old('username') || '' }}" required />
+          @if(flashMessages.has('errors.username'))
+            <span class="error">{{ flashMessages.get('errors.username') }}</span>
+          @end
+          @if(flashMessages.has('errors'))
+            <span class="error">{{ flashMessages.get('errors') }}</span>
+          @end
+        </div>
+
+        <div class="form-group">
+          <label for="password">Mot de passe</label>
+          <input type="password" name="password" required />
+        </div>
+
+        <button type="submit" class="btn-primary">Se connecter</button>
+      </form>
+
+      <p class="auth-footer">
+        Pas de compte ? <a href="#">S'inscrire</a>
+      </p>
+    </div>
+  </main>
+  @!component('partials/footer')
