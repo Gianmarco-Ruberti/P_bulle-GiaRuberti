@@ -1,7 +1,6 @@
 import Deck from '#models/deck'
 import vine from '@vinejs/vine'
 import type { HttpContext } from '@adonisjs/core/http'
-import { dd } from '@adonisjs/core/services/dumper'
 
 export default class DecksController {
   async show({ params, view }: HttpContext) {
