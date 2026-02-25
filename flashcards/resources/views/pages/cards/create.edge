@@ -13,7 +13,6 @@
         <form action="{{ route('cards.store') }}" method="POST">
           {{ csrfField() }}
           <input type="hidden" name="deckId" value="{{ deckId }}" />
-          {{ deckId }}
           <div class="form-group">
             <label for="question">Question (min. 10 caractères)</label>
             <input type="text" name="question" id="question" value="{{ old('question') || '' }}" />

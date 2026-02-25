@@ -11,7 +11,7 @@ import router from '@adonisjs/core/services/router'
 import AuthController from '../app/controllers/auth_controller.js'
 import DecksController from '../app/controllers/decks_controller.js'
 import CardsController from '../app/controllers/cards_controller.js'
-router.get('/', [DecksController, 'index']).as('deck.index')
+import { middleware } from './kernel.js'
 
 //auth
 router.group(() => {
@@ -21,25 +21,30 @@ router.group(() => {
 
 router
   .group(() => {
-    router.get('/new', [DecksController, 'create']).as('decks.create')
-    router.post('/', [DecksController, 'store']).as('decks.store')
+    router.get('/', [DecksController, 'index']).as('deck.index')
+    router
+      .group(() => {
+        router.get('/new', [DecksController, 'create']).as('decks.create')
+        router.post('/', [DecksController, 'store']).as('decks.store')
 
-    router.get('/:id', [DecksController, 'show']).as('decks.show')
+        router.get('/:id', [DecksController, 'show']).as('decks.show')
 
-    router.get('/:id/edit', [DecksController, 'edit']).as('decks.edit')
-    router.put('/:id', [DecksController, 'update']).as('decks.update')
+        router.get('/:id/edit', [DecksController, 'edit']).as('decks.edit')
+        router.put('/:id', [DecksController, 'update']).as('decks.update')
 
-    router.delete('/delete/:id', [DecksController, 'destroy']).as('decks.destroy')
+        router.delete('/delete/:id', [DecksController, 'destroy']).as('decks.destroy')
+      })
+      .prefix('/decks')
+
+    router
+      .group(() => {
+        router.get('/new', [CardsController, 'create']).as('cards.create')
+        router.post('/', [CardsController, 'store']).as('cards.store')
+        router.get('/:id/edit', [CardsController, 'edit']).as('cards.edit')
+        router.put('/:id', [CardsController, 'update']).as('cards.update')
+        router.get('/:id', [CardsController, 'show']).as('cards.show')
+        router.delete('/:id', [CardsController, 'destroy']).as('card.destroy')
+      })
+      .prefix('/card')
   })
-  .prefix('/decks')
-
-router
-  .group(() => {
-    router.get('/new', [CardsController, 'create']).as('cards.create')
-    router.post('/', [CardsController, 'store']).as('cards.store')
-    router.get('/:id/edit', [CardsController, 'edit']).as('cards.edit')
-    router.put('/:id', [CardsController, 'update']).as('cards.update')
-    router.get('/:id', [CardsController, 'show']).as('cards.show')
-    router.delete('/:id', [CardsController, 'destroy']).as('card.destroy')
-  })
-  .prefix('/card')
+  .use(middleware.auth())
