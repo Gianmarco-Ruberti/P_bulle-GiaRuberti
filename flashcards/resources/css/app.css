@@ -19,9 +19,34 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-bottom: 20px;
-  border-bottom: 2px solid var(--light);
-  margin-bottom: 30px;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}
+header .user-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+header .user-section form {
+  display: flex;
+  margin: 0;
+}
+
+.btn-outline {
+  padding: 5px 12px;
+  background: transparent;
+  border: 1px solid #dc3545;
+  color: #dc3545;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-outline:hover {
+  background: #dc3545;
+  color: white;
 }
 
 h1 {
