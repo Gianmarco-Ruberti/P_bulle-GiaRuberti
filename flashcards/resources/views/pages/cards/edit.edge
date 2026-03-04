@@ -2,8 +2,7 @@
   <h2>
     Modifier la Question
   </h2>
-
-  <form action="/cards/{{ card.id }}?_method=PUT" method="POST">
+  <form action="{{ route('cards.update', [card.id]) }}?_method=PUT" method="POST">
     {{ csrfField() }}
     <div class="form-group">
       <label>Question</label>
@@ -18,9 +17,9 @@
 
     <div class="form-group">
       <label>reponse</label>
-      <textarea name="reponse">{{ old('reponse') || card.answer }}</textarea>
+      <textarea name="answer">{{ old('answer') || card.answer }}</textarea>
       {{-- Message d'erreur pour la reponse --}}
-      @inputError('reponse')
+      @inputError('answer')
         <p class="error">
           {{ $messages.join(', ') }}
         </p>

@@ -1,8 +1,7 @@
 import { HttpContext } from '@adonisjs/core/http'
-
 import Card from '../models/card.js'
-import vine from '@vinejs/vine'
 import { dd } from '@adonisjs/core/services/dumper'
+import { createCardValidator, updateCardValidator } from '#validators/card'
 
 export default class CardsController {
   async show({ params, view }: HttpContext) {
@@ -16,27 +15,13 @@ export default class CardsController {
   }
   // Enregistre les données
   async store({ request, response, session }: HttpContext) {
-    // 1. Définir les règles de validation
-    const payload = await request.validateUsing(
-      vine.compile(
-        vine.object({
-          question: vine
-            .string()
-            .trim()
-            .unique({ table: 'cards', column: 'question' })
-            .minLength(10),
-          answer: vine.string().trim(),
-          deckId: vine.number().exists({ table: 'decks', column: 'id' }),
-        })
-      )
-    )
-    // 2. Création de la card
+    const payload = await request.validateUsing(createCardValidator)
+
     await Card.create(payload)
 
-    // 3. Notification de succès et redirection
     session.flash('notification', {
       type: 'success',
-      message: 'La carte a été créé avec succès !',
+      message: 'La carte a été créée avec succès !',
     })
     return response.redirect().toPath('/')
   }
@@ -44,15 +29,18 @@ export default class CardsController {
     const card = await Card.findOrFail(params.id)
     return view.render('pages/Cards/edit', { card })
   }
-  async update({ params, response, session }: HttpContext) {
-    // 1. On récupère le card existant grâce à l'ID passé dans l'URL (/cards/:id)
-    // Si l'ID n'existe pas, Adonis s'arrête ici et renvoie une erreur 404.
+  // Mettre à jour une carte existante
+  async update({ params, request, response, session }: HttpContext) {
     const card = await Card.findOrFail(params.id)
 
-    // 4. On stocke un message temporaire pour l'afficher sur la page suivante
-    session.flash('notification', 'card mis à jour !')
+    // On passe l'ID actuel au validateur pour l'exception d'unicité
+    const payload = await request.validateUsing(updateCardValidator(card.id, card.deckId))
 
-    // 5. Redirection vers la page de détails du card que l'on vient de modifier
+    await card.merge(payload).save()
+
+    session.flash('notification', 'Carte mise à jour !')
+
+    // Utilise le chemin exact de ta route (attention au singulier/pluriel)
     return response.redirect().toPath(`/cards/${card.id}`)
   }
   async destroy({ params, response, session }: HttpContext) {

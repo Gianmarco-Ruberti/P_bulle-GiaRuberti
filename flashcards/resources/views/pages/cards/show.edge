@@ -47,9 +47,9 @@
             Cette action est irréversible.
           </p>
         </div>
-        <a href="/card/{{ card.id }}/edit" class="btn btn-outline">Modifier</a>
+        <a href="{{ route('cards.edit', [card.id]) }}" class="btn btn-outline">Modifier</a>
         <form
-          action="{{ route('card.destroy', [card.id]) }}?_method=DELETE"
+          action="{{ route('cards.destroy', [card.id]) }}?_method=DELETE"
           method="POST"
           onsubmit="return confirm('Es-tu sûr de vouloir supprimer ce deck ? Cette action est irréversible.')"
         >
