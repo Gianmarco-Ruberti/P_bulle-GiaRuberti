@@ -2,8 +2,14 @@
   <h1>
     <a href="/" style="text-decoration: none; color: inherit;">FlashCards</a>
   </h1>
-  <div>
+  <div class="user-section">
     <span>Utilisateur : <strong>{{ auth.user.username }}</strong></span>
-    <button href="#" class="btn btn-outline" style="margin-left:10px">Déco</button>
+
+    <form action="{{ route('auth_logout') }}" method="POST">
+      {{ csrfField() }}
+      <button type="submit" class="btn btn-outline">
+        Déco
+      </button>
+    </form>
   </div>
 </header>

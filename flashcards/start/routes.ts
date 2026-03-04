@@ -22,6 +22,7 @@ router.group(() => {
 router
   .group(() => {
     router.get('/', [DecksController, 'index']).as('decks.index')
+    router.post('/logout', [AuthController, 'logout']).as('auth_logout')
     router
       .group(() => {
         router.get('/new', [DecksController, 'create']).as('decks.create')
