@@ -21,7 +21,7 @@ router.group(() => {
 
 router
   .group(() => {
-    router.get('/', [DecksController, 'index']).as('deck.index')
+    router.get('/', [DecksController, 'index']).as('decks.index')
     router
       .group(() => {
         router.get('/new', [DecksController, 'create']).as('decks.create')

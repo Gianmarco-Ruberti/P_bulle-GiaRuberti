@@ -1,6 +1,6 @@
 import type { HttpContext } from '@adonisjs/core/http'
-import User from '#models/user'
 import { loginValidator } from '#validators/auth'
+import User from '#models/user'
 
 export default class AuthController {
   async showLogin({ view }: HttpContext) {
@@ -25,17 +25,16 @@ export default class AuthController {
 
       return response.redirect().toRoute('decks.index')
     } catch (error) {
-      console.error(' Échec de la connexion')
+      console.error('--- DÉBOGAGE ERREUR ---')
+      console.error(error.code) // Affiche le code d'erreur (ex: E_INVALID_CREDENTIALS)
+      console.error(error.message) // Affiche le message explicite
 
-      // Si l'erreur vient de la validation (VineJS)
       if (error.messages) {
-        console.log(' Erreurs de validation:', error.messages)
-      } else {
-        console.log(' Cause probable: Mauvais mot de passe')
+        console.log('Erreurs de validation (VineJS):', error.messages)
       }
 
       session.flash('errors', 'Identifiants invalides')
-      return response.redirect().toRoute('deck.index')
+      return response.redirect().back() // Plus sûr que de forcer une route
     }
   }
 
