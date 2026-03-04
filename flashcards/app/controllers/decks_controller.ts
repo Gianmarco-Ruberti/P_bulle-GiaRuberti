@@ -1,6 +1,7 @@
 import Deck from '#models/deck'
 import type { HttpContext } from '@adonisjs/core/http'
 import { createDeckValidator, updateDeckValidator } from '#validators/deck'
+import { frMessages } from '../validators/message.js'
 
 export default class DecksController {
   async index({ view }: HttpContext) {
@@ -22,7 +23,9 @@ export default class DecksController {
   // Enregistre les données
   async store({ request, response, session }: HttpContext) {
     // Utilisation du validateur externe
-    const payload = await request.validateUsing(createDeckValidator)
+    const payload = await request.validateUsing(createDeckValidator, {
+      messagesProvider: frMessages,
+    })
 
     await Deck.create(payload)
 

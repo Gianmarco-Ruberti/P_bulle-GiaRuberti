@@ -2,6 +2,7 @@ import { HttpContext } from '@adonisjs/core/http'
 import Card from '../models/card.js'
 import { dd } from '@adonisjs/core/services/dumper'
 import { createCardValidator, updateCardValidator } from '#validators/card'
+import { frMessages } from '../validators/message.js'
 
 export default class CardsController {
   async show({ params, view }: HttpContext) {
@@ -15,7 +16,9 @@ export default class CardsController {
   }
   // Enregistre les données
   async store({ request, response, session }: HttpContext) {
-    const payload = await request.validateUsing(createCardValidator)
+    const payload = await request.validateUsing(createCardValidator, {
+      messagesProvider: frMessages,
+    })
 
     await Card.create(payload)
 
