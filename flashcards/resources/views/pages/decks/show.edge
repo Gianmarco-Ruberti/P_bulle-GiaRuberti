@@ -17,6 +17,11 @@
         <h3>
           Cartes dans ce deck ({{ deck.cards.length }})
         </h3>
+        @if(deck.cards.length > 0)
+        <a href="{{ route('decks.game', { id: deck.id }) }}" class="btn-play">
+            Jouer
+        </a>
+        @end
         <a href="{{ route('cards.create', {}, { qs: { deckId: deck.id } }) }}" class="btn btn-primary">
           + Ajouter une carte
         </a>
