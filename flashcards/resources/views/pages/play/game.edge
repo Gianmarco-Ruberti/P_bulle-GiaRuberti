@@ -1,0 +1,34 @@
+@component('components/layout', { title: `Jeu : ${deck.title}` })
+@vite('resources/js/app.js')
+<main>
+    {{-- Container de données --}}
+    <div id="game-container" 
+         data-cards='{{ JSON.stringify(cards) }}'
+         data-deck-id="{{ deck.id }}">
+    </div>
+
+    {{-- La Flashcard --}}
+    <div class="flashcard" id="card-element">
+        <div class="card-inner" id="card-inner">
+            {{-- Recto --}}
+            <div class="card-front">
+                <h2 id="question-text">Chargement...</h2>
+                <p class="hint">Clique pour voir la réponse</p>
+            </div>
+
+            {{-- Verso --}}
+            <div class="card-back">
+                <h2 id="answer-text">...</h2>
+                <div class="game-actions">
+                    <button type="button" class="btn-wrong" onclick="nextCard(false)">
+                        <span>Faux</span>
+                    </button>
+                    <button type="button" class="btn-right" onclick="nextCard(true)">
+                        <span>Juste</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@end
