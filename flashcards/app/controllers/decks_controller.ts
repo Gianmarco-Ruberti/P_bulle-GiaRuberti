@@ -83,4 +83,30 @@ export default class DecksController {
       return response.redirect().back()
     }
   }
+  async game({ params, request, view }: HttpContext) {
+    const deck = await Deck.findOrFail(params.id)
+    const limit = Number(request.input('limit', 20))
+
+    const cards = await deck.related('cards').query()
+      .orderByRaw('RAND()')
+      .limit(limit)
+
+    return view.render('pages/play/game', { 
+      deck, 
+      cards,
+      limit: cards.length
+    })
+}
+
+async result({ params, request, view }: HttpContext) {
+    const deck = await Deck.findOrFail(params.id)
+    const score = Number(request.input('score', 0))
+    const total = Number(request.input('total', 0))
+
+    return view.render('pages/play/result', { 
+      deck, 
+      score, 
+      total
+    })
+}
 }
