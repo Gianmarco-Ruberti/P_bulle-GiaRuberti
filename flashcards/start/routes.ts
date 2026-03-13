@@ -23,6 +23,7 @@ router
   .group(() => {
     router.get('/', [DecksController, 'index']).as('decks.index')
     router.post('/logout', [AuthController, 'logout']).as('auth_logout')
+
     router
       .group(() => {
         router.get('/new', [DecksController, 'create']).as('decks.create')
@@ -36,6 +37,11 @@ router
         router.delete('/delete/:id', [DecksController, 'destroy']).as('decks.destroy')
       })
       .prefix('/decks')
+
+      router.group(() => {
+      router.get('/:id/game', [DecksController, 'game']).as('decks.game')
+      router.get('/:id/result', [DecksController, 'result']).as('decks.result')
+      }).prefix('/game')
 
     router
       .group(() => {
